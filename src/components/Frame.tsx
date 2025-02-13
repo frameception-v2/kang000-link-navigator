@@ -21,6 +21,7 @@ import { useSession } from "next-auth/react";
 import { createStore } from "mipd";
 import { Label } from "~/components/ui/label";
 import { PROJECT_TITLE, SOCIAL_LINKS, DEFAULT_BUTTON_TEXT } from "~/lib/constants";
+import { PurpleButton } from "~/components/ui/PurpleButton";
 
 function LinkTreeCard() {
   const handleLinkClick = (url: string) => {
