@@ -20,19 +20,32 @@ import { base, optimism } from "wagmi/chains";
 import { useSession } from "next-auth/react";
 import { createStore } from "mipd";
 import { Label } from "~/components/ui/label";
-import { PROJECT_TITLE } from "~/lib/constants";
+import { PROJECT_TITLE, SOCIAL_LINKS, DEFAULT_BUTTON_TEXT } from "~/lib/constants";
 
-function ExampleCard() {
+function LinkTreeCard() {
+  const handleLinkClick = (url: string) => {
+    sdk.actions.openUrl(url);
+  };
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Welcome to the Frame Template</CardTitle>
+        <CardTitle>Social Links Navigator</CardTitle>
         <CardDescription>
-          This is an example card that you can customize or remove
+          Explore my latest updates and profiles
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <Label>Place content in a Card here.</Label>
+      <CardContent className="flex flex-col gap-3">
+        {SOCIAL_LINKS.map((link, index) => (
+          <PurpleButton
+            key={index}
+            onClick={() => handleLinkClick(link.url)}
+            className="w-full justify-start gap-2"
+          >
+            <span>{link.buttonText || DEFAULT_BUTTON_TEXT}</span>
+            <span className="ml-auto opacity-75">→</span>
+          </PurpleButton>
+        ))}
       </CardContent>
     </Card>
   );
@@ -140,7 +153,7 @@ export default function Frame() {
         <h1 className="text-2xl font-bold text-center mb-4 text-gray-700 dark:text-gray-300">
           {PROJECT_TITLE}
         </h1>
-        <ExampleCard />
+        <LinkTreeCard />
       </div>
     </div>
   );
